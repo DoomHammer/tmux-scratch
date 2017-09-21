@@ -1,16 +1,17 @@
-tmux-man
-========
+tmux-scratch
+============
 
-Search man from your tmux sesseion
+A persistent scratchpad shell session always one keystroke away.
 
 # Description
 
-Prompts for a manual and opens it in a tmux split.
+Opens a new tmux split containing a persistent shell session inside it.
 
 # Requirements
 
 * [tmux](https://tmux.github.io/)
 * [tpm](https://github.com/tmux-plugins/tpm)
+* [abduco](https://github.com/martanne/abduco/)
 * bash >= 4.x
 
 # Install
@@ -18,49 +19,41 @@ Prompts for a manual and opens it in a tmux split.
 Install tpm and add the following line to your `~/.tmux.conf`.
 
 ```bash
-set-option -g @plugin 'knakayama/tmux-man'
+set-option -g @plugin 'doomhammer/tmux-scratch'
 ```
 
-then, press `Prefix + I` in tmux session. When prompted select eg. `m man`. Available abbreviations are:
-
-| Abbr | Command     |
-| ---- | ----------- |
-| m    | man         |
-| a    | ansible-doc |
-| r    | rfc         |
-| h    | httpdoc     |
+then, press `Prefix + I` in tmux session.
 
 # Usage
 
-Default key binding is `Prefix + m`. If you want to change this key binding, set the following line in your `~/.tmux.conf`.
+Default key binding is `Prefix + b`. If you want to change this key binding, set the following line in your `~/.tmux.conf`.
 
 ```bash
-set-option -g @man-key 'x' # or your favorite key binding
+set-option -g @scratch-key 'x' # or your favorite key binding
 ```
 
-Default `split-window` size is 10. If you want to change this size, set the following line to your `~/.tmux.conf`.
+Default `split-window` size is 20. If you want to change this size, set the following line to your `~/.tmux.conf`.
 
 ```bash
-set-option -g @man-size 15 # or your favorite size
+set-option -g @scratch-size 15 # or your favorite size
 ```
 
 or
 
 ```bash
-set-option -g @man-size 20% # if you like to keep things relative
+set-option -g @scratch-size 20% # if you like to keep things relative
 ```
 
 Default `split-window` orientation is vertical. If you want to change this orientation, set the following line in your `~/.tmux.conf`.
 
 ```bash
-set-option -g @man-orientation 'h'
+set-option -g @scratch-orientation 'h'
 ```
 
-As `man` runs in non-interactive shell your `.bashrc` or `.zshrc` settings are not loaded.
-If you want to load them (for you may have an alias for man set up), set the following line in your `~/.tmux.conf`.
+Default command run as the session is `$(getent passwd $(whoami)| sed -e 's/.*://')`. If you want to change this orientation, set the following line in your `~/.tmux.conf`.
 
 ```bash
-set-option -g @man-shell-interactive 'on'
+set-option -g @scratch-cmd '/bin/zsh'
 ```
 
 # License
@@ -69,10 +62,11 @@ MIT
 
 # Author
 
-[knakayama](https://github.com/knakayama)
+[DoomHammer](https://github.com/DoomHammer)
 
 # Credits
 
 Thanks to:
 
-* Piotr Gaczkowski (@DoomHammer)
+* [knakayama](https://github.com/knakayama) for the `tmux-man` that inspired
+  this

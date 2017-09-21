@@ -3,12 +3,10 @@
 CURRENT_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "${CURRENT_DIR}/scripts/helpers.sh"
 
-readonly man_key="$(get_tmux_option "@man-key" "m")"
-readonly man_len="$(get_tmux_option "@man-len" "10")"
+readonly scratch_key="$(get_tmux_option "@scratch-key" "b")"
 
-tmux bind-key "$man_key" \
-  command-prompt -p "Enter command:" \
-  "run-shell '${CURRENT_DIR}/scripts/man.sh %%'"
+tmux bind-key "$scratch_key" \
+  run-shell "${CURRENT_DIR}/scripts/scratch.sh"
 
 # Local Variables:
 # mode: Shell-Script
